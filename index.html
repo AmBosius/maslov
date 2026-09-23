@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Маслов — оригинальные моторные масла</title>
-  <meta name="description" content="Оригинальные моторные масла Motul, Liqui Moly, Mobil 1, Castrol, Shell и ENEOS от официальных дистрибьюторов. Декларация на каждую партию, подбор по автомобилю.">
+  <meta name="description" content="Оригинальные моторные масла Motul, Liqui Moly, Mobil 1, Castrol, Shell и ENEOS от официальных дистрибьюторов. Декларация на каждую партию, подбор по VIN и бесплатная замена при покупке.">
 
   <!-- Превью ссылки в мессенджерах и соцсетях -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Маслов — мотор не отличит подделку. Я — отличу.">
-  <meta property="og:description" content="Оригинальные моторные масла с декларацией на каждую партию. Подбор по автомобилю, доставка в день заказа.">
+  <meta property="og:description" content="Оригинальные моторные масла с декларацией на каждую партию. Подбор по VIN за 2 минуты и бесплатная замена при покупке.">
   <meta property="og:image" content="https://ambosius.github.io/maslov/assets/og-image.jpg">
   <meta property="og:url" content="https://ambosius.github.io/maslov/">
   <meta property="og:locale" content="ru_RU">
@@ -33,7 +33,7 @@
 
       <nav class="mainnav" aria-label="Основное меню">
         <ul class="mainnav__list" id="mainnavList">
-          <li><a href="#picker">Подбор</a></li>
+          <li><a href="#service">Подбор и&nbsp;замена</a></li>
           <li><a href="#catalog">Каталог</a></li>
           <li><a href="#original">Как отличить подделку</a></li>
           <li><a href="#contacts">Контакты</a></li>
@@ -42,7 +42,7 @@
 
       <div class="header__actions">
         <a href="tel:+79990001122" class="header__phone">+7 999 000-11-22</a>
-        <a href="#picker" class="btn btn--outline btn--sm">Подобрать масло</a>
+        <a href="#service" class="btn btn--outline btn--sm">Подобрать по&nbsp;VIN</a>
         <button class="burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false" aria-controls="mainnavList">
           <span></span><span></span>
         </button>
@@ -72,7 +72,7 @@
             до&nbsp;оплаты.
           </p>
           <div class="hero__buttons">
-            <a href="#picker" class="btn btn--amber">Подобрать масло под авто</a>
+            <a href="#service" class="btn btn--amber">Подобрать масло по&nbsp;VIN</a>
             <a href="#catalog" class="link-arrow">Весь каталог</a>
           </div>
         </div>
@@ -118,58 +118,58 @@
           и&nbsp;храню его в&nbsp;отапливаемом складе: даже оригинал портится,
           если зиму пролежит в&nbsp;холодном гараже.
         </p>
-        <a href="#picker" class="link-arrow">Подобрать масло</a>
+        <a href="#service" class="link-arrow">Подобрать масло</a>
       </div>
     </section>
 
-    <!-- ===== Подбор по автомобилю ===== -->
-    <section class="section picker" id="picker">
-      <div class="container picker__inner">
+    <!-- ===== Почему ко мне: подбор, замена, цена ===== -->
+    <section class="section service" id="service">
+      <div class="container">
 
-        <div class="picker__intro">
-          <p class="kicker">Подбор по автомобилю</p>
-          <h2 class="section-title">Скажите, на&nbsp;чём ездите. Я&nbsp;скажу, что&nbsp;лить.</h2>
-          <p class="picker__note">
-            Вязкость&nbsp;— это половина дела. Важнее допуск производителя:
-            с&nbsp;ним масло проверено именно под ваш мотор. Не&nbsp;нашли свою
-            машину&nbsp;— напишите VIN, подберу вручную.
-          </p>
-        </div>
+        <p class="kicker">Почему ко&nbsp;мне, а&nbsp;не&nbsp;на&nbsp;маркетплейс</p>
+        <h2 class="section-title service__title">Маркетплейс продаст канистру. Я&nbsp;решу вопрос с&nbsp;маслом.</h2>
 
-        <div class="picker__panel">
-          <form class="picker__form" id="pickerForm" autocomplete="off">
-            <label class="field">
-              <span class="field__label">Марка</span>
-              <select class="field__select" id="pickMake">
-                <option value="">Выберите марку</option>
-              </select>
-            </label>
-            <label class="field">
-              <span class="field__label">Модель</span>
-              <select class="field__select" id="pickModel" disabled>
-                <option value="">Сначала марку</option>
-              </select>
-            </label>
-            <label class="field">
-              <span class="field__label">Двигатель</span>
-              <select class="field__select" id="pickEngine" disabled>
-                <option value="">Сначала модель</option>
-              </select>
-            </label>
-          </form>
-
-          <!-- Результат подбора: заполняется скриптом -->
-          <div class="picker__result" id="pickerResult" hidden>
-            <dl class="specs" id="pickerSpecs"></dl>
-            <p class="picker__subtitle">Что есть в&nbsp;наличии под этот мотор</p>
-            <ul class="products products--compact" id="pickerProducts"></ul>
-          </div>
-
-          <p class="picker__empty" id="pickerEmpty">
-            Выберите марку, модель и&nbsp;двигатель&nbsp;— покажу вязкость, допуск,
-            объём заливки и&nbsp;подходящие масла из&nbsp;наличия.
-          </p>
-        </div>
+        <ul class="service__list">
+          <li class="service__item">
+            <p class="service__tag">Подбор</p>
+            <h3 class="service__name">Подберу по&nbsp;VIN за&nbsp;2&nbsp;минуты</h3>
+            <div class="service__body">
+              <p>
+                Скиньте VIN или фото СТС в&nbsp;Telegram&nbsp;— сверю допуски
+                по&nbsp;каталогу производителя и&nbsp;скажу, что лить и&nbsp;сколько.
+                Бесплатно, даже если купите не&nbsp;у&nbsp;меня.
+              </p>
+              <div class="service__actions">
+                <a href="https://t.me/" class="btn btn--amber btn--sm" target="_blank" rel="noopener">Написать в&nbsp;Telegram</a>
+                <a href="tel:+79990001122" class="link-arrow">Позвонить</a>
+              </div>
+            </div>
+          </li>
+          <li class="service__item">
+            <p class="service__tag">Замена</p>
+            <h3 class="service__name">Купили у&nbsp;меня&nbsp;— залью сам, бесплатно</h3>
+            <div class="service__body">
+              <p>
+                Приезжайте на&nbsp;склад: поменяю масло за&nbsp;20&nbsp;минут, пока
+                вы&nbsp;пьёте кофе. Фильтр ваш или мой по&nbsp;цене склада.
+                Старое масло утилизирую сам.
+              </p>
+              <div class="service__actions">
+                <a href="#contacts" class="link-arrow">Записаться на&nbsp;замену</a>
+              </div>
+            </div>
+          </li>
+          <li class="service__item">
+            <p class="service__tag">Цена</p>
+            <h3 class="service__name">Нашли оригинал дешевле&nbsp;— сделаю такую&nbsp;же цену</h3>
+            <div class="service__body">
+              <p>
+                Покажите чек или ссылку на&nbsp;официального продавца бренда&nbsp;—
+                выровняю цену. Экономить на&nbsp;масле можно, на&nbsp;подлинности&nbsp;— нет.
+              </p>
+            </div>
+          </li>
+        </ul>
 
       </div>
     </section>
@@ -236,7 +236,11 @@
             </li>
             <li>
               <span class="contacts__label">Склад и&nbsp;самовывоз</span>
-              <span class="contacts__value">ул. Промышленная, 14, бокс 3</span>
+              <span class="contacts__value">Измайловский бульвар, 43</span>
+            </li>
+            <li>
+              <span class="contacts__label">Часы работы</span>
+              <span class="contacts__value">Ежедневно, 9:00–21:00</span>
             </li>
           </ul>
         </div>
@@ -255,8 +259,8 @@
           </div>
 
           <label class="field">
-            <span class="field__label">Машина</span>
-            <input class="field__input" type="text" name="car" id="requestCar" placeholder="Например, Kia Rio 1.6, 2019">
+            <span class="field__label">Машина или VIN</span>
+            <input class="field__input" type="text" name="car" placeholder="Kia Rio 1.6, 2019 — или VIN, подберу сам">
           </label>
 
           <label class="field">
@@ -283,6 +287,22 @@
           </div>
         </form>
 
+      </div>
+    </section>
+
+    <!-- ===== Карта: виджет Яндекса без ключа API ===== -->
+    <section class="map" aria-label="Склад на карте">
+      <iframe class="map__frame" title="Склад на карте: Москва, Измайловский бульвар, 43"
+              src="https://yandex.ru/map-widget/v1/?ll=37.798126%2C55.797295&amp;z=16&amp;pt=37.798126%2C55.797295%2Cpm2rdl&amp;theme=dark"
+              loading="lazy" allowfullscreen></iframe>
+
+      <div class="container map__inner">
+        <div class="map__card">
+          <p class="kicker">Склад и&nbsp;самовывоз</p>
+          <p class="map__address">Москва, Измайловский бульвар,&nbsp;43</p>
+          <p class="map__hint">Вход со&nbsp;двора, парковка у&nbsp;ворот. Ежедневно 9:00–21:00.</p>
+          <a class="link-arrow" href="https://yandex.ru/maps/?rtext=~55.797295%2C37.798126&amp;rtt=auto" target="_blank" rel="noopener">Проложить маршрут</a>
+        </div>
       </div>
     </section>
 

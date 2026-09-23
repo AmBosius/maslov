@@ -52,70 +52,11 @@ const PRODUCTS = [
   { id: 'eneos-xprime-020', brand: 'ENEOS', name: 'X Prime', viscosity: '0W-20', volume: 4, price: 4190, approvals: ['API SP', 'ILSAC GF-6A'] },
 ];
 
-// ===== Данные: машины для подбора =====
-// viscosities — что допускает производитель; approvals — нужен хотя бы один из допусков;
-// capacity — объём заливки с фильтром, литры.
-const CARS = {
-  'Lada': {
-    'Vesta': [
-      { engine: '1.6 л, 106 л.с. (21129)', viscosities: ['5W-30', '5W-40'], approvals: ['API SN', 'API SP', 'ACEA A3/B4'], capacity: 4.4 },
-      { engine: '1.8 л, 122 л.с. (21179)', viscosities: ['5W-30', '5W-40'], approvals: ['API SN', 'API SP', 'ACEA A3/B4'], capacity: 4.4 },
-    ],
-  },
-  'Kia': {
-    'Rio IV': [
-      { engine: '1.4 л, 100 л.с. (G4LC)', viscosities: ['0W-20', '5W-30'], approvals: ['API SP', 'API SN', 'ILSAC GF-6A', 'ILSAC GF-5'], capacity: 3.6 },
-      { engine: '1.6 л, 123 л.с. (G4FG)', viscosities: ['0W-20', '5W-30'], approvals: ['API SP', 'API SN', 'ILSAC GF-6A', 'ILSAC GF-5'], capacity: 3.6 },
-    ],
-  },
-  'Hyundai': {
-    'Solaris II': [
-      { engine: '1.6 л, 123 л.с. (G4FG)', viscosities: ['0W-20', '5W-30'], approvals: ['API SP', 'API SN', 'ILSAC GF-6A', 'ILSAC GF-5'], capacity: 3.6 },
-    ],
-    'Creta': [
-      { engine: '1.6 л, 121 л.с. (G4FG)', viscosities: ['0W-20', '5W-30'], approvals: ['API SP', 'API SN', 'ILSAC GF-6A', 'ILSAC GF-5'], capacity: 3.6 },
-      { engine: '2.0 л, 149 л.с. (G4NA)', viscosities: ['0W-20', '5W-30'], approvals: ['API SP', 'API SN', 'ILSAC GF-6A', 'ILSAC GF-5'], capacity: 4.0 },
-    ],
-  },
-  'Toyota': {
-    'Camry XV70': [
-      { engine: '2.0 л, 150 л.с. (6AR-FSE)', viscosities: ['0W-20'], approvals: ['API SP', 'ILSAC GF-6A'], capacity: 4.2 },
-      { engine: '2.5 л, 200 л.с. (A25A-FKS)', viscosities: ['0W-20'], approvals: ['API SP', 'ILSAC GF-6A'], capacity: 4.5 },
-    ],
-  },
-  'Volkswagen': {
-    'Polo седан': [
-      { engine: '1.6 MPI, 110 л.с. (CWVA)', viscosities: ['5W-30', '5W-40'], approvals: ['VW 502 00', 'VW 504 00'], capacity: 3.6 },
-      { engine: '1.4 TSI, 125 л.с. (CZCA)', viscosities: ['5W-30', '5W-40'], approvals: ['VW 502 00', 'VW 504 00'], capacity: 4.0 },
-    ],
-  },
-  'Skoda': {
-    'Octavia A7': [
-      { engine: '1.4 TSI, 150 л.с. (CZDA)', viscosities: ['5W-30', '5W-40'], approvals: ['VW 502 00', 'VW 504 00'], capacity: 4.0 },
-      { engine: '1.8 TSI, 180 л.с. (CJSA)', viscosities: ['5W-30', '5W-40'], approvals: ['VW 502 00', 'VW 504 00'], capacity: 5.7 },
-    ],
-  },
-  'Renault': {
-    'Logan II': [
-      { engine: '1.6 л, 82 л.с. (K7M)', viscosities: ['5W-40'], approvals: ['RN0700', 'RN0710'], capacity: 3.3 },
-      { engine: '1.6 л, 102 л.с. (K4M)', viscosities: ['5W-40'], approvals: ['RN0700', 'RN0710'], capacity: 4.8 },
-    ],
-  },
-};
-
 // ===== Общие помощники =====
 const formatPrice = value => value.toLocaleString('ru-RU') + ' ₽';
 const formatLitres = value => String(value).replace('.', ',') + ' л';
 
-// Какие канистры взять под объём заливки: сначала крупные, остаток — литровыми
-function suggestCans(capacity) {
-  if (capacity <= 4) return 'хватит канистры 4 л';
-  if (capacity <= 5) return 'хватит канистры 5 л';
-  const extra = Math.ceil(capacity - 5);
-  return `канистра 5 л + ${extra} л доливки`;
-}
-
-// Разметка строки товара — общая для каталога и подбора
+// Разметка строки товара в каталоге
 function productRow(product) {
   const isAdded = cart.has(product.id);
   return `
@@ -158,7 +99,6 @@ function updateCart() {
   cartCount.textContent = `${items.length} ${pluralPositions(items.length)}`;
   cartSum.textContent = formatPrice(sum);
 
-  // Кнопки одного товара могут быть и в каталоге, и в подборе — обновляем все
   document.querySelectorAll('.product__add').forEach(btn => {
     const isAdded = cart.has(btn.dataset.id);
     btn.classList.toggle('added', isAdded);
@@ -211,86 +151,9 @@ catalogFilters.addEventListener('click', (e) => {
 
 renderCatalog();
 
-// ===== Подбор по автомобилю =====
-const pickMake = document.getElementById('pickMake');
-const pickModel = document.getElementById('pickModel');
-const pickEngine = document.getElementById('pickEngine');
-const pickerResult = document.getElementById('pickerResult');
-const pickerEmpty = document.getElementById('pickerEmpty');
-const pickerSpecs = document.getElementById('pickerSpecs');
-const pickerProducts = document.getElementById('pickerProducts');
-
-// Заполнить select списком вариантов
-function fillSelect(select, placeholder, values) {
-  select.innerHTML = `<option value="">${placeholder}</option>` +
-    values.map((v, i) => `<option value="${i}">${v}</option>`).join('');
-  select.disabled = values.length === 0;
-}
-
-fillSelect(pickMake, 'Выберите марку', Object.keys(CARS));
-// У марок value — индекс; переводим обратно в название
-const makeNames = Object.keys(CARS);
-
-function resetResult() {
-  pickerResult.hidden = true;
-  pickerEmpty.hidden = false;
-}
-
-pickMake.addEventListener('change', () => {
-  const make = makeNames[pickMake.value];
-  fillSelect(pickModel, make ? 'Выберите модель' : 'Сначала марку', make ? Object.keys(CARS[make]) : []);
-  fillSelect(pickEngine, 'Сначала модель', []);
-  resetResult();
-});
-
-pickModel.addEventListener('change', () => {
-  const make = makeNames[pickMake.value];
-  const model = Object.keys(CARS[make])[pickModel.value];
-  const engines = model ? CARS[make][model].map(e => e.engine) : [];
-  fillSelect(pickEngine, model ? 'Выберите двигатель' : 'Сначала модель', engines);
-  resetResult();
-});
-
-pickEngine.addEventListener('change', () => {
-  const make = makeNames[pickMake.value];
-  const model = Object.keys(CARS[make])[pickModel.value];
-  const car = CARS[make][model][pickEngine.value];
-  if (!car) {
-    resetResult();
-    return;
-  }
-  renderPick(car);
-});
-
-function renderPick(car) {
-  // Подходит масло нужной вязкости, у которого есть хотя бы один из требуемых допусков
-  const matches = PRODUCTS.filter(p =>
-    car.viscosities.includes(p.viscosity) &&
-    p.approvals.some(a => car.approvals.includes(a))
-  );
-
-  pickerSpecs.innerHTML = `
-    <div><dt>Вязкость</dt><dd>${car.viscosities.join(' или ')}</dd></div>
-    <div><dt>Допуск</dt><dd>${car.approvals.slice(0, 2).join(', ')}</dd></div>
-    <div><dt>Объём заливки</dt><dd>${formatLitres(car.capacity)}<small>${suggestCans(car.capacity)}</small></dd></div>`;
-
-  pickerProducts.innerHTML = matches.length
-    ? matches.map(productRow).join('')
-    : '<li class="products__none">Сейчас в наличии нет. Оставьте заявку — привезу за 2–3 дня.</li>';
-
-  pickerEmpty.hidden = true;
-  pickerResult.hidden = false;
-
-  // Машину из подбора сразу подставляем в заявку, чтобы не вводить второй раз
-  const make = makeNames[pickMake.value];
-  const model = Object.keys(CARS[make])[pickModel.value];
-  requestCar.value = `${make} ${model}, ${car.engine}`;
-}
-
 // ===== Форма заявки =====
 const requestForm = document.getElementById('requestForm');
 const requestPhone = document.getElementById('requestPhone');
-const requestCar = document.getElementById('requestCar');
 const phoneError = document.getElementById('phoneError');
 const requestItems = document.getElementById('requestItems');
 const requestItemsList = document.getElementById('requestItemsList');
