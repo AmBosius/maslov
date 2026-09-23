@@ -1,0 +1,234 @@
+/* ===== Админка: дополняет styles.css, использует те же переменные ===== */
+
+/* ---------- Вход ---------- */
+.login {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+}
+
+.login__form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 36px;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  background: var(--color-bg-soft);
+}
+
+.login__title {
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -0.03em;
+}
+
+.login__status { min-height: 1.5em; font-size: 14px; color: var(--color-text-muted); }
+.login__status.error { color: #e5604a; }
+
+/* ---------- Шапка панели ---------- */
+.panel__head {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(13, 12, 10, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.panel__head-inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 68px;
+}
+
+.tabs { display: flex; gap: 4px; }
+
+.tabs__btn {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-text-muted);
+  transition: background 0.2s, color 0.2s;
+}
+
+.tabs__btn:hover { color: var(--color-text); }
+
+.tabs__btn.active { background: var(--color-bg-soft); color: var(--color-text); }
+
+.tabs__badge {
+  display: inline-block;
+  min-width: 22px;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--color-amber);
+  color: #15120c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.panel__logout {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.panel__logout:hover { color: var(--color-text); }
+
+.panel__body { padding-top: 32px; padding-bottom: 80px; }
+
+.panel__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.panel__hint { font-size: 14px; color: var(--color-text-muted); }
+
+/* ---------- Новый товар ---------- */
+.newproduct {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 0.8fr 0.7fr 0.8fr;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-amber);
+  border-radius: 10px;
+}
+
+.newproduct__wide { grid-column: 1 / -1; }
+
+.newproduct__actions { grid-column: 1 / -1; display: flex; gap: 12px; }
+
+/* ---------- Строки товаров и заявок ---------- */
+.rows { border-top: 1px solid var(--color-line); }
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 90px 70px 130px 150px 44px;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Скрытый товар — приглушён, чтобы сразу было видно, чего нет на сайте */
+.row--out { opacity: 0.5; }
+
+.row__brand { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); }
+.row__name { font-weight: 600; font-size: 17px; }
+.row__muted { font-size: 14px; color: var(--color-text-muted); }
+.row__visc { font-weight: 800; font-size: 20px; color: var(--color-amber); }
+
+/* Компактные поля внутри строки */
+.cell-input,
+.cell-select {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid rgba(244, 239, 230, 0.22);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 15px;
+}
+
+.cell-input:focus,
+.cell-select:focus { border-color: var(--color-amber); outline: none; }
+
+.cell-select option { background: var(--color-bg); }
+
+.cell-select[data-status="in_stock"] { border-color: rgba(120, 190, 120, 0.6); }
+.cell-select[data-status="on_order"] { border-color: var(--color-amber); }
+.cell-select[data-status="out"]      { border-color: rgba(244, 239, 230, 0.22); }
+
+.row__delete {
+  width: 44px;
+  height: 42px;
+  border-radius: 6px;
+  color: var(--color-text-muted);
+  font-size: 18px;
+}
+
+.row__delete:hover { background: rgba(229, 96, 74, 0.15); color: #e5604a; }
+
+/* ---------- Заявки ---------- */
+.req {
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr 160px;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.req--new .req__number::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--color-amber);
+  vertical-align: middle;
+}
+
+.req__number { font-weight: 700; }
+.req__phone { font-weight: 700; font-size: 18px; }
+.req__phone:hover { color: var(--color-amber); }
+.req__items { font-size: 14px; }
+.req__items li { display: flex; justify-content: space-between; gap: 12px; padding: 2px 0; }
+.req__total { margin-top: 6px; font-weight: 700; color: var(--color-amber); }
+.req__comment { margin-top: 6px; font-size: 14px; color: var(--color-text-muted); white-space: pre-wrap; }
+
+.rows__empty { padding: 40px 0; color: var(--color-text-muted); }
+
+/* ---------- Уведомление ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 30;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.toast.error { background: #e5604a; color: #fff; }
+
+/* ---------- Телефон: строки превращаются в карточки ---------- */
+@media (max-width: 800px) {
+  .panel__head-inner { gap: 12px; }
+
+  .newproduct { grid-template-columns: 1fr 1fr; padding: 16px; }
+
+  .row {
+    grid-template-columns: 1fr 1fr 44px;
+    grid-template-areas:
+      "info  info  info"
+      "price status del";
+    gap: 10px;
+  }
+
+  .row__info { grid-area: info; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .row__visc-cell, .row__vol-cell { display: none; }
+  .row__price-cell { grid-area: price; }
+  .row__status-cell { grid-area: status; }
+  .row__delete { grid-area: del; }
+
+  .req { grid-template-columns: 1fr; gap: 10px; }
+}

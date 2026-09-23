@@ -187,21 +187,8 @@
         </div>
 
         <div class="filters" id="catalogFilters">
-          <div class="filters__group" data-filter="viscosity">
-            <button class="chip active" data-value="all">Любая вязкость</button>
-            <button class="chip" data-value="0W-20">0W-20</button>
-            <button class="chip" data-value="5W-30">5W-30</button>
-            <button class="chip" data-value="5W-40">5W-40</button>
-          </div>
-          <div class="filters__group" data-filter="brand">
-            <button class="chip active" data-value="all">Все бренды</button>
-            <button class="chip" data-value="Motul">Motul</button>
-            <button class="chip" data-value="Liqui Moly">Liqui Moly</button>
-            <button class="chip" data-value="Mobil 1">Mobil&nbsp;1</button>
-            <button class="chip" data-value="Castrol">Castrol</button>
-            <button class="chip" data-value="Shell">Shell</button>
-            <button class="chip" data-value="ENEOS">ENEOS</button>
-          </div>
+          <div class="filters__group" data-filter="viscosity"></div>
+          <div class="filters__group" data-filter="brand"></div>
         </div>
 
         <ul class="products" id="catalogList"></ul>
@@ -274,7 +261,10 @@
             <ul id="requestItemsList"></ul>
           </div>
 
-          <button class="btn btn--amber request__submit" type="submit">Жду звонка</button>
+          <button class="btn btn--amber request__submit" type="submit" id="requestSend">Жду звонка</button>
+          <p class="request__fail" id="requestFail" hidden>
+            Не&nbsp;получилось отправить. Позвоните: <a href="tel:+79990001122" class="link-underline">+7 999 000-11-22</a>
+          </p>
           <p class="request__legal">
             Нажимая кнопку, вы соглашаетесь на&nbsp;обработку персональных данных.
             Номер нужен только чтобы перезвонить&nbsp;— без рассылок.
@@ -284,6 +274,7 @@
           <div class="request__done" id="requestDone" hidden>
             <p class="request__done-title">Принял, спасибо!</p>
             <p>Перезвоню в&nbsp;течение 15&nbsp;минут, если сейчас рабочее время.</p>
+            <p class="request__number" id="requestNumber"></p>
           </div>
         </form>
 
@@ -329,6 +320,7 @@
     </div>
   </footer>
 
+  <script src="config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

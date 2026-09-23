@@ -14,6 +14,9 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* hidden должен прятать всегда, даже если у элемента свой display */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
 
 body {
@@ -450,6 +453,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: var(--color-text-muted);
 }
 
+.product__status {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-amber);
+}
+
 /* Вязкость — главный визуальный якорь строки */
 .product__viscosity {
   font-weight: 800;
@@ -601,6 +611,12 @@ a.contacts__value:hover { color: var(--color-amber); }
 
 .request__legal { font-size: 13px; color: var(--color-text-muted); }
 
+.request__fail { font-size: 15px; color: #e5604a; }
+
+.request__submit:disabled { opacity: 0.6; cursor: wait; }
+
+.request__number { margin-top: 8px; font-weight: 600; color: var(--color-text); }
+
 /* После отправки форма накрывается сообщением */
 .request__done {
   position: absolute;
@@ -616,8 +632,6 @@ a.contacts__value:hover { color: var(--color-amber); }
   text-align: center;
   color: var(--color-text-muted);
 }
-
-.request__done[hidden] { display: none; }
 
 .request__done-title {
   font-weight: 800;

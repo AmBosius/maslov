@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админка — Маслов</title>
+  <!-- Служебная страница: поисковикам здесь делать нечего -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0d0c0a">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+
+  <!-- ===== Вход ===== -->
+  <main class="login" id="loginView" hidden>
+    <form class="login__form" id="loginForm">
+      <p class="logo">маслов</p>
+      <h1 class="login__title">Вход для&nbsp;продавца</h1>
+
+      <label class="field">
+        <span class="field__label">Почта</span>
+        <input class="field__input" type="email" name="email" autocomplete="username" required>
+      </label>
+      <label class="field">
+        <span class="field__label">Пароль</span>
+        <input class="field__input" type="password" name="password" autocomplete="current-password" required>
+      </label>
+
+      <button class="btn btn--amber" type="submit" id="loginBtn">Войти</button>
+      <p class="login__status" id="loginStatus" role="status"></p>
+    </form>
+  </main>
+
+  <!-- ===== Рабочая панель ===== -->
+  <div class="panel" id="panelView" hidden>
+    <header class="panel__head">
+      <div class="container panel__head-inner">
+        <a href="./" class="logo" title="Открыть сайт">маслов</a>
+
+        <nav class="tabs" role="tablist">
+          <button class="tabs__btn active" data-tab="products" role="tab">Товары</button>
+          <button class="tabs__btn" data-tab="requests" role="tab">
+            Заявки <span class="tabs__badge" id="newCount" hidden></span>
+          </button>
+        </nav>
+
+        <button class="panel__logout" id="logoutBtn">Выйти</button>
+      </div>
+    </header>
+
+    <!-- Товары -->
+    <section class="container panel__body" id="tab-products">
+      <div class="panel__bar">
+        <p class="panel__hint">Цена и статус сохраняются сразу после изменения. «Нет» — товар скрыт с&nbsp;сайта.</p>
+        <button class="btn btn--amber btn--sm" id="addProductBtn">+ Добавить товар</button>
+      </div>
+
+      <!-- Форма нового товара -->
+      <form class="newproduct" id="newProductForm" hidden>
+        <label class="field"><span class="field__label">Бренд</span><input class="field__input" name="brand" required placeholder="Motul"></label>
+        <label class="field"><span class="field__label">Название</span><input class="field__input" name="name" required placeholder="8100 X-clean"></label>
+        <label class="field"><span class="field__label">Вязкость</span><input class="field__input" name="viscosity" required placeholder="5W-30"></label>
+        <label class="field"><span class="field__label">Объём, л</span><input class="field__input" name="volume" type="number" step="0.5" min="0.5" required value="4"></label>
+        <label class="field"><span class="field__label">Цена, ₽</span><input class="field__input" name="price" type="number" min="0" required></label>
+        <label class="field newproduct__wide"><span class="field__label">Допуски через запятую</span><input class="field__input" name="approvals" placeholder="VW 504 00, ACEA C3"></label>
+        <div class="newproduct__actions">
+          <button class="btn btn--amber btn--sm" type="submit">Сохранить</button>
+          <button class="btn btn--outline btn--sm" type="button" id="cancelProductBtn">Отмена</button>
+        </div>
+      </form>
+
+      <ul class="rows" id="productRows"></ul>
+    </section>
+
+    <!-- Заявки -->
+    <section class="container panel__body" id="tab-requests" hidden>
+      <div class="panel__bar">
+        <div class="filters__group" id="requestFilter">
+          <button class="chip active" data-value="open">Новые и&nbsp;в&nbsp;работе</button>
+          <button class="chip" data-value="all">Все</button>
+        </div>
+        <button class="btn btn--outline btn--sm" id="reloadRequestsBtn">Обновить</button>
+      </div>
+      <ul class="rows" id="requestRows"></ul>
+    </section>
+
+    <!-- Всплывающее «Сохранено» / ошибка -->
+    <p class="toast" id="toast" role="status" hidden></p>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

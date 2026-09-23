@@ -34,23 +34,43 @@ mainnavList.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => setMenu(false));
 });
 
-// ===== Данные: товары в наличии =====
-// Цены демонстрационные. approvals — допуски производителей авто.
-const PRODUCTS = [
-  { id: 'motul-8100-xclean-530', brand: 'Motul', name: '8100 X-clean', viscosity: '5W-30', volume: 5, price: 7490, approvals: ['VW 504 00', 'VW 507 00', 'ACEA C3'] },
-  { id: 'motul-8100-xcess-540', brand: 'Motul', name: '8100 X-cess', viscosity: '5W-40', volume: 5, price: 6990, approvals: ['VW 502 00', 'MB 229.5', 'RN0700', 'RN0710'] },
-  { id: 'lm-toptec-4200-530', brand: 'Liqui Moly', name: 'Top Tec 4200', viscosity: '5W-30', volume: 5, price: 7890, approvals: ['VW 504 00', 'VW 507 00', 'MB 229.51'] },
-  { id: 'lm-special-aa-020', brand: 'Liqui Moly', name: 'Special Tec AA', viscosity: '0W-20', volume: 4, price: 5690, approvals: ['API SP', 'ILSAC GF-6A'] },
-  { id: 'lm-molygen-540', brand: 'Liqui Moly', name: 'Molygen New Generation', viscosity: '5W-40', volume: 4, price: 5290, approvals: ['API SN', 'ACEA A3/B4', 'VW 502 00'] },
-  { id: 'mobil1-esp-530', brand: 'Mobil 1', name: 'ESP', viscosity: '5W-30', volume: 4, price: 5990, approvals: ['VW 504 00', 'VW 507 00', 'MB 229.52'] },
-  { id: 'mobil1-020', brand: 'Mobil 1', name: 'Advanced Fuel Economy', viscosity: '0W-20', volume: 4, price: 5490, approvals: ['API SP', 'ILSAC GF-6A'] },
-  { id: 'castrol-edge-530', brand: 'Castrol', name: 'EDGE LL', viscosity: '5W-30', volume: 4, price: 4890, approvals: ['VW 504 00', 'VW 507 00'] },
-  { id: 'castrol-magnatec-540', brand: 'Castrol', name: 'Magnatec A3/B4', viscosity: '5W-40', volume: 4, price: 3790, approvals: ['API SN', 'ACEA A3/B4', 'VW 502 00', 'RN0700'] },
-  { id: 'shell-ultra-540', brand: 'Shell', name: 'Helix Ultra', viscosity: '5W-40', volume: 4, price: 4290, approvals: ['API SP', 'VW 502 00', 'MB 229.5', 'RN0700', 'RN0710'] },
-  { id: 'shell-hx8-530', brand: 'Shell', name: 'Helix HX8 ECT', viscosity: '5W-30', volume: 4, price: 3890, approvals: ['API SN', 'ACEA C3', 'VW 504 00', 'VW 507 00'] },
-  { id: 'eneos-touring-530', brand: 'ENEOS', name: 'Premium Touring', viscosity: '5W-30', volume: 4, price: 3590, approvals: ['API SN', 'ILSAC GF-5'] },
-  { id: 'eneos-xprime-020', brand: 'ENEOS', name: 'X Prime', viscosity: '0W-20', volume: 4, price: 4190, approvals: ['API SP', 'ILSAC GF-6A'] },
-];
+// ===== Данные каталога =====
+// Сначала база Supabase, при сбое — снимок data/products.json.
+// Пустая витрина из-за сетевого сбоя хуже слегка устаревшей.
+const CONFIG = window.MASLOV_CONFIG || {};
+const hasBackend = Boolean(
+  CONFIG.supabaseUrl && CONFIG.supabaseKey && !CONFIG.supabaseUrl.includes('ВСТАВЬТЕ')
+);
+
+let products = [];
+
+// Запрос к REST API Supabase с публичным ключом
+async function supabase(path, options = {}) {
+  const res = await fetch(`${CONFIG.supabaseUrl}/rest/v1/${path}`, {
+    ...options,
+    headers: {
+      apikey: CONFIG.supabaseKey,
+      Authorization: `Bearer ${CONFIG.supabaseKey}`,
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+  if (!res.ok) throw new Error(`${path} → ${res.status} ${await res.text()}`);
+  return res.json();
+}
+
+async function loadProducts() {
+  if (hasBackend) {
+    try {
+      // Скрытые товары база не отдаёт сама — это решает политика доступа
+      return await supabase('products?select=*&order=sort_order,brand');
+    } catch (err) {
+      console.warn('База недоступна, показываю снимок каталога:', err);
+    }
+  }
+  const res = await fetch('data/products.json?v=1');
+  return res.json();
+}
 
 // ===== Общие помощники =====
 const formatPrice = value => value.toLocaleString('ru-RU') + ' ₽';
@@ -65,6 +85,7 @@ function productRow(product) {
         <p class="product__brand">${product.brand}</p>
         <p class="product__name">${product.name}</p>
         <p class="product__approvals">${product.approvals.join(' · ')}</p>
+        ${product.status === 'on_order' ? '<p class="product__status">Под заказ — привезу за 2–3 дня</p>' : ''}
       </div>
       <p class="product__viscosity">${product.viscosity}</p>
       <p class="product__volume">${formatLitres(product.volume)}</p>
@@ -92,7 +113,7 @@ function pluralPositions(n) {
 }
 
 function updateCart() {
-  const items = PRODUCTS.filter(p => cart.has(p.id));
+  const items = products.filter(p => cart.has(p.id));
   const sum = items.reduce((total, p) => total + p.price, 0);
 
   cartbar.hidden = items.length === 0;
@@ -128,7 +149,7 @@ const catalogFilters = document.getElementById('catalogFilters');
 const activeFilters = { viscosity: 'all', brand: 'all' };
 
 function renderCatalog() {
-  const items = PRODUCTS.filter(p =>
+  const items = products.filter(p =>
     (activeFilters.viscosity === 'all' || p.viscosity === activeFilters.viscosity) &&
     (activeFilters.brand === 'all' || p.brand === activeFilters.brand)
   );
@@ -137,7 +158,23 @@ function renderCatalog() {
     ? items.map(productRow).join('')
     : '<li class="products__none">Такого сочетания сейчас нет. Напишите — привезу под заказ за 2–3 дня.</li>';
 
-  catalogCount.textContent = `Показано ${items.length} из ${PRODUCTS.length}`;
+  catalogCount.textContent = `Показано ${items.length} из ${products.length}`;
+}
+
+// Кнопки фильтров собираем из самих товаров
+function renderFilters() {
+  const unique = key => [...new Set(products.map(p => p[key]))];
+  const groups = {
+    viscosity: ['Любая вязкость', unique('viscosity').sort()],
+    brand: ['Все бренды', unique('brand')],
+  };
+
+  catalogFilters.querySelectorAll('.filters__group').forEach(group => {
+    const [allLabel, values] = groups[group.dataset.filter];
+    group.innerHTML =
+      `<button class="chip active" data-value="all">${allLabel}</button>` +
+      values.map(v => `<button class="chip" data-value="${v}">${v}</button>`).join('');
+  });
 }
 
 catalogFilters.addEventListener('click', (e) => {
@@ -149,7 +186,16 @@ catalogFilters.addEventListener('click', (e) => {
   renderCatalog();
 });
 
-renderCatalog();
+loadProducts()
+  .then(list => {
+    products = list;
+    renderFilters();
+    renderCatalog();
+  })
+  .catch(err => {
+    console.error(err);
+    catalogList.innerHTML = '<li class="products__none">Каталог не загрузился. Позвоните — расскажу, что есть: +7 999 000-11-22.</li>';
+  });
 
 // ===== Форма заявки =====
 const requestForm = document.getElementById('requestForm');
@@ -158,6 +204,9 @@ const phoneError = document.getElementById('phoneError');
 const requestItems = document.getElementById('requestItems');
 const requestItemsList = document.getElementById('requestItemsList');
 const requestDone = document.getElementById('requestDone');
+const requestNumber = document.getElementById('requestNumber');
+const requestSend = document.getElementById('requestSend');
+const requestFail = document.getElementById('requestFail');
 
 // Маска телефона: из любых введённых цифр собираем +7 (999) 000-11-22
 function formatPhone(value) {
@@ -201,7 +250,7 @@ document.addEventListener('cart:change', (e) => {
   ).join('');
 });
 
-requestForm.addEventListener('submit', (e) => {
+requestForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   if (phoneDigits(requestPhone.value).length !== 10) {
@@ -211,14 +260,36 @@ requestForm.addEventListener('submit', (e) => {
     return;
   }
 
-  // Демо: бэкенда нет, поэтому просто показываем, что ушло бы продавцу
-  const data = Object.fromEntries(new FormData(requestForm));
-  data.items = PRODUCTS.filter(p => cart.has(p.id)).map(p => `${p.brand} ${p.name} ${p.viscosity}`);
-  console.log('Заявка:', data);
+  // Шлём только id товаров: позиции и сумму база пересчитает сама
+  const payload = { ...Object.fromEntries(new FormData(requestForm)), items: [...cart] };
 
-  requestDone.hidden = false;
-  cart.clear();
-  updateCart();
+  requestSend.disabled = true;
+  requestSend.textContent = 'Отправляю…';
+  requestFail.hidden = true;
+
+  try {
+    let number = null;
+    if (hasBackend) {
+      number = await supabase('rpc/submit_request', {
+        method: 'POST',
+        body: JSON.stringify({ payload }),
+      });
+    } else {
+      console.log('Демо-режим, база не подключена. Заявка:', payload);
+    }
+
+    requestNumber.textContent = number ? `Номер заявки: ${number}` : '';
+    requestDone.hidden = false;
+    requestForm.reset();
+    cart.clear();
+    updateCart();
+  } catch (err) {
+    console.error('Заявка не отправилась:', err);
+    requestFail.hidden = false;
+  } finally {
+    requestSend.disabled = false;
+    requestSend.textContent = 'Жду звонка';
+  }
 });
 
 // ===== Плашка заявки прячется, когда форма уже на экране =====

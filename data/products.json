@@ -1,0 +1,197 @@
+[
+  {
+    "id": "motul-8100-xclean-530",
+    "brand": "Motul",
+    "name": "8100 X-clean",
+    "viscosity": "5W-30",
+    "volume": 5,
+    "price": 7490,
+    "approvals": [
+      "VW 504 00",
+      "VW 507 00",
+      "ACEA C3"
+    ],
+    "status": "in_stock",
+    "sort_order": 10
+  },
+  {
+    "id": "motul-8100-xcess-540",
+    "brand": "Motul",
+    "name": "8100 X-cess",
+    "viscosity": "5W-40",
+    "volume": 5,
+    "price": 6990,
+    "approvals": [
+      "VW 502 00",
+      "MB 229.5",
+      "RN0700",
+      "RN0710"
+    ],
+    "status": "in_stock",
+    "sort_order": 20
+  },
+  {
+    "id": "lm-toptec-4200-530",
+    "brand": "Liqui Moly",
+    "name": "Top Tec 4200",
+    "viscosity": "5W-30",
+    "volume": 5,
+    "price": 7890,
+    "approvals": [
+      "VW 504 00",
+      "VW 507 00",
+      "MB 229.51"
+    ],
+    "status": "in_stock",
+    "sort_order": 30
+  },
+  {
+    "id": "lm-special-aa-020",
+    "brand": "Liqui Moly",
+    "name": "Special Tec AA",
+    "viscosity": "0W-20",
+    "volume": 4,
+    "price": 5690,
+    "approvals": [
+      "API SP",
+      "ILSAC GF-6A"
+    ],
+    "status": "in_stock",
+    "sort_order": 40
+  },
+  {
+    "id": "lm-molygen-540",
+    "brand": "Liqui Moly",
+    "name": "Molygen New Generation",
+    "viscosity": "5W-40",
+    "volume": 4,
+    "price": 5290,
+    "approvals": [
+      "API SN",
+      "ACEA A3/B4",
+      "VW 502 00"
+    ],
+    "status": "in_stock",
+    "sort_order": 50
+  },
+  {
+    "id": "mobil1-esp-530",
+    "brand": "Mobil 1",
+    "name": "ESP",
+    "viscosity": "5W-30",
+    "volume": 4,
+    "price": 5990,
+    "approvals": [
+      "VW 504 00",
+      "VW 507 00",
+      "MB 229.52"
+    ],
+    "status": "in_stock",
+    "sort_order": 60
+  },
+  {
+    "id": "mobil1-020",
+    "brand": "Mobil 1",
+    "name": "Advanced Fuel Economy",
+    "viscosity": "0W-20",
+    "volume": 4,
+    "price": 5490,
+    "approvals": [
+      "API SP",
+      "ILSAC GF-6A"
+    ],
+    "status": "in_stock",
+    "sort_order": 70
+  },
+  {
+    "id": "castrol-edge-530",
+    "brand": "Castrol",
+    "name": "EDGE LL",
+    "viscosity": "5W-30",
+    "volume": 4,
+    "price": 4890,
+    "approvals": [
+      "VW 504 00",
+      "VW 507 00"
+    ],
+    "status": "in_stock",
+    "sort_order": 80
+  },
+  {
+    "id": "castrol-magnatec-540",
+    "brand": "Castrol",
+    "name": "Magnatec A3/B4",
+    "viscosity": "5W-40",
+    "volume": 4,
+    "price": 3790,
+    "approvals": [
+      "API SN",
+      "ACEA A3/B4",
+      "VW 502 00",
+      "RN0700"
+    ],
+    "status": "in_stock",
+    "sort_order": 90
+  },
+  {
+    "id": "shell-ultra-540",
+    "brand": "Shell",
+    "name": "Helix Ultra",
+    "viscosity": "5W-40",
+    "volume": 4,
+    "price": 4290,
+    "approvals": [
+      "API SP",
+      "VW 502 00",
+      "MB 229.5",
+      "RN0700",
+      "RN0710"
+    ],
+    "status": "in_stock",
+    "sort_order": 100
+  },
+  {
+    "id": "shell-hx8-530",
+    "brand": "Shell",
+    "name": "Helix HX8 ECT",
+    "viscosity": "5W-30",
+    "volume": 4,
+    "price": 3890,
+    "approvals": [
+      "API SN",
+      "ACEA C3",
+      "VW 504 00",
+      "VW 507 00"
+    ],
+    "status": "in_stock",
+    "sort_order": 110
+  },
+  {
+    "id": "eneos-touring-530",
+    "brand": "ENEOS",
+    "name": "Premium Touring",
+    "viscosity": "5W-30",
+    "volume": 4,
+    "price": 3590,
+    "approvals": [
+      "API SN",
+      "ILSAC GF-5"
+    ],
+    "status": "in_stock",
+    "sort_order": 120
+  },
+  {
+    "id": "eneos-xprime-020",
+    "brand": "ENEOS",
+    "name": "X Prime",
+    "viscosity": "0W-20",
+    "volume": 4,
+    "price": 4190,
+    "approvals": [
+      "API SP",
+      "ILSAC GF-6A"
+    ],
+    "status": "in_stock",
+    "sort_order": 130
+  }
+]
