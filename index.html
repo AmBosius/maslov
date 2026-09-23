@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Маслов — оригинальные моторные масла</title>
+  <meta name="description" content="Оригинальные моторные масла Motul, Liqui Moly, Mobil 1, Castrol, Shell и ENEOS от официальных дистрибьюторов. Декларация на каждую партию, подбор по автомобилю.">
+
+  <!-- Превью ссылки в мессенджерах и соцсетях -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Маслов — мотор не отличит подделку. Я — отличу.">
+  <meta property="og:description" content="Оригинальные моторные масла с декларацией на каждую партию. Подбор по автомобилю, доставка в день заказа.">
+  <meta property="og:image" content="https://ambosius.github.io/maslov/assets/og-image.jpg">
+  <meta property="og:url" content="https://ambosius.github.io/maslov/">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0d0c0a">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Первый кадр видео грузим заранее, чтобы экран не был пустым -->
+  <link rel="preload" href="assets/hero-poster.webp" as="image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== Шапка: прозрачная поверх видео ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#top" class="logo" aria-label="Маслов — на главную">маслов</a>
+
+      <nav class="mainnav" aria-label="Основное меню">
+        <ul class="mainnav__list" id="mainnavList">
+          <li><a href="#picker">Подбор</a></li>
+          <li><a href="#catalog">Каталог</a></li>
+          <li><a href="#original">Как отличить подделку</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a href="tel:+79990001122" class="header__phone">+7 999 000-11-22</a>
+        <a href="#picker" class="btn btn--outline btn--sm">Подобрать масло</a>
+        <button class="burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false" aria-controls="mainnavList">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== Главный экран: видео на весь экран ===== -->
+    <section class="hero">
+      <!-- Бесшовный цикл 5 с: конец ролика растворяется в начало, поэтому шва не видно -->
+      <video class="hero__video" autoplay muted loop playsinline preload="auto"
+             poster="assets/hero-poster.webp" src="assets/hero-loop.mp4"></video>
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <h1 class="hero__title">
+          Мотор не&nbsp;отличит подделку.
+          <span class="hero__title-accent">Я&nbsp;— отличу.</span>
+        </h1>
+
+        <div class="hero__bottom">
+          <p class="hero__lead">
+            Оригинальные Motul, Liqui Moly, Mobil&nbsp;1, Castrol, Shell и&nbsp;ENEOS
+            от&nbsp;официальных дистрибьюторов. Декларацию на&nbsp;партию покажу
+            до&nbsp;оплаты.
+          </p>
+          <div class="hero__buttons">
+            <a href="#picker" class="btn btn--amber">Подобрать масло под авто</a>
+            <a href="#catalog" class="link-arrow">Весь каталог</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Бренды: крупно и спокойно, как титры ===== -->
+    <section class="brands" aria-label="Бренды в наличии">
+      <div class="container">
+        <ul class="brands__list">
+          <li>Motul</li>
+          <li>Liqui Moly</li>
+          <li>Mobil&nbsp;1</li>
+          <li>Castrol</li>
+          <li>Shell</li>
+          <li>ENEOS</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Почему оригинал: большой кадр + текст ===== -->
+    <section class="story" id="original">
+      <div class="story__photo">
+        <!-- Фото: Lucas Larsson, Unsplash. На телефонах грузится лёгкая версия -->
+        <img src="assets/engine-1600.webp"
+             srcset="assets/engine-900.webp 900w, assets/engine-1600.webp 1600w"
+             sizes="(max-width: 900px) 100vw, 55vw"
+             width="1600" height="1141"
+             alt="Двигатель крупным планом, янтарные патрубки в полумраке" loading="lazy">
+      </div>
+
+      <div class="story__text">
+        <p class="kicker">Почему это важно</p>
+        <h2 class="story__title">Подделку не&nbsp;видно в&nbsp;канистре. Её&nbsp;видно через 10&nbsp;000&nbsp;км.</h2>
+        <p>
+          Поддельное масло выглядит так&nbsp;же, пахнет так&nbsp;же и&nbsp;стоит
+          на&nbsp;пару сотен дешевле. Разница проявляется потом: нагар, закоксованные
+          кольца, масложор и&nbsp;счёт за&nbsp;ремонт, который дороже всех
+          канистр за&nbsp;жизнь машины.
+        </p>
+        <p>
+          Поэтому я&nbsp;беру масло только у&nbsp;официальных дистрибьюторов
+          и&nbsp;храню его в&nbsp;отапливаемом складе: даже оригинал портится,
+          если зиму пролежит в&nbsp;холодном гараже.
+        </p>
+        <a href="#picker" class="link-arrow">Подобрать масло</a>
+      </div>
+    </section>
+
+    <!-- ===== Подбор по автомобилю ===== -->
+    <section class="section picker" id="picker">
+      <div class="container picker__inner">
+
+        <div class="picker__intro">
+          <p class="kicker">Подбор по автомобилю</p>
+          <h2 class="section-title">Скажите, на&nbsp;чём ездите. Я&nbsp;скажу, что&nbsp;лить.</h2>
+          <p class="picker__note">
+            Вязкость&nbsp;— это половина дела. Важнее допуск производителя:
+            с&nbsp;ним масло проверено именно под ваш мотор. Не&nbsp;нашли свою
+            машину&nbsp;— напишите VIN, подберу вручную.
+          </p>
+        </div>
+
+        <div class="picker__panel">
+          <form class="picker__form" id="pickerForm" autocomplete="off">
+            <label class="field">
+              <span class="field__label">Марка</span>
+              <select class="field__select" id="pickMake">
+                <option value="">Выберите марку</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field__label">Модель</span>
+              <select class="field__select" id="pickModel" disabled>
+                <option value="">Сначала марку</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field__label">Двигатель</span>
+              <select class="field__select" id="pickEngine" disabled>
+                <option value="">Сначала модель</option>
+              </select>
+            </label>
+          </form>
+
+          <!-- Результат подбора: заполняется скриптом -->
+          <div class="picker__result" id="pickerResult" hidden>
+            <dl class="specs" id="pickerSpecs"></dl>
+            <p class="picker__subtitle">Что есть в&nbsp;наличии под этот мотор</p>
+            <ul class="products products--compact" id="pickerProducts"></ul>
+          </div>
+
+          <p class="picker__empty" id="pickerEmpty">
+            Выберите марку, модель и&nbsp;двигатель&nbsp;— покажу вязкость, допуск,
+            объём заливки и&nbsp;подходящие масла из&nbsp;наличия.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Каталог: прайс-лист, а не плитка карточек ===== -->
+    <section class="section catalog" id="catalog">
+      <div class="container">
+
+        <div class="catalog__head">
+          <div>
+            <p class="kicker">Каталог</p>
+            <h2 class="section-title">В наличии на&nbsp;складе</h2>
+          </div>
+          <p class="catalog__count" id="catalogCount"></p>
+        </div>
+
+        <div class="filters" id="catalogFilters">
+          <div class="filters__group" data-filter="viscosity">
+            <button class="chip active" data-value="all">Любая вязкость</button>
+            <button class="chip" data-value="0W-20">0W-20</button>
+            <button class="chip" data-value="5W-30">5W-30</button>
+            <button class="chip" data-value="5W-40">5W-40</button>
+          </div>
+          <div class="filters__group" data-filter="brand">
+            <button class="chip active" data-value="all">Все бренды</button>
+            <button class="chip" data-value="Motul">Motul</button>
+            <button class="chip" data-value="Liqui Moly">Liqui Moly</button>
+            <button class="chip" data-value="Mobil 1">Mobil&nbsp;1</button>
+            <button class="chip" data-value="Castrol">Castrol</button>
+            <button class="chip" data-value="Shell">Shell</button>
+            <button class="chip" data-value="ENEOS">ENEOS</button>
+          </div>
+        </div>
+
+        <ul class="products" id="catalogList"></ul>
+
+        <p class="catalog__foot">
+          Цены актуальны на&nbsp;сентябрь 2026. Нужна бочка на&nbsp;автосервис&nbsp;—
+          <a href="#contacts" class="link-underline">напишите</a>, посчитаю оптом.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Заявка и контакты ===== -->
+    <section class="section request" id="contacts">
+      <div class="container request__inner">
+
+        <div class="request__intro">
+          <p class="kicker">Заявка</p>
+          <h2 class="section-title">Не&nbsp;дозвонились? Оставьте номер&nbsp;— перезвоню сам.</h2>
+          <p class="request__note">
+            Беру трубку с&nbsp;9:00 до&nbsp;21:00. Если был под машиной и&nbsp;не&nbsp;ответил&nbsp;—
+            перезвоню в&nbsp;течение 15&nbsp;минут. Ночью&nbsp;— первым делом утром.
+          </p>
+
+          <ul class="contacts">
+            <li>
+              <span class="contacts__label">Телефон</span>
+              <a href="tel:+79990001122" class="contacts__value">+7 999 000-11-22</a>
+            </li>
+            <li>
+              <span class="contacts__label">Telegram</span>
+              <a href="https://t.me/" class="contacts__value" target="_blank" rel="noopener">@maslov_oil</a>
+            </li>
+            <li>
+              <span class="contacts__label">Склад и&nbsp;самовывоз</span>
+              <span class="contacts__value">ул. Промышленная, 14, бокс 3</span>
+            </li>
+          </ul>
+        </div>
+
+        <form class="request__form" id="requestForm" novalidate>
+          <div class="request__row">
+            <label class="field">
+              <span class="field__label">Как к&nbsp;вам обращаться</span>
+              <input class="field__input" type="text" name="name" placeholder="Имя" autocomplete="given-name">
+            </label>
+            <label class="field">
+              <span class="field__label">Телефон *</span>
+              <input class="field__input" type="tel" name="phone" id="requestPhone" placeholder="+7 (___) ___-__-__" autocomplete="tel" required>
+              <span class="field__error" id="phoneError" hidden>Проверьте номер: нужно 10 цифр после +7</span>
+            </label>
+          </div>
+
+          <label class="field">
+            <span class="field__label">Машина</span>
+            <input class="field__input" type="text" name="car" id="requestCar" placeholder="Например, Kia Rio 1.6, 2019">
+          </label>
+
+          <label class="field">
+            <span class="field__label">Комментарий</span>
+            <textarea class="field__input field__input--area" name="comment" rows="3" placeholder="Нужна доставка, удобное время для звонка…"></textarea>
+          </label>
+
+          <!-- Позиции из заявки — заполняются скриптом -->
+          <div class="request__items" id="requestItems" hidden>
+            <p class="field__label">В&nbsp;заявке</p>
+            <ul id="requestItemsList"></ul>
+          </div>
+
+          <button class="btn btn--amber request__submit" type="submit">Жду звонка</button>
+          <p class="request__legal">
+            Нажимая кнопку, вы соглашаетесь на&nbsp;обработку персональных данных.
+            Номер нужен только чтобы перезвонить&nbsp;— без рассылок.
+          </p>
+
+          <!-- Сообщение после отправки -->
+          <div class="request__done" id="requestDone" hidden>
+            <p class="request__done-title">Принял, спасибо!</p>
+            <p>Перезвоню в&nbsp;течение 15&nbsp;минут, если сейчас рабочее время.</p>
+          </div>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- ===== Плашка заявки: появляется, когда что-то добавлено ===== -->
+    <div class="cartbar" id="cartbar" hidden>
+      <div class="container cartbar__inner">
+        <p class="cartbar__text">
+          В заявке <strong id="cartCount">0</strong>
+          <span class="cartbar__sep">·</span>
+          <strong id="cartSum">0 ₽</strong>
+        </p>
+        <a href="#contacts" class="btn btn--amber btn--sm">Оформить заявку</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== Подвал ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#top" class="logo">маслов</a>
+      <p class="footer__text">Оригинальные моторные масла с&nbsp;2017 года. ИП Маслов А.&nbsp;В.</p>
+      <p class="footer__text">Демо-проект для портфолио. Фото мотора&nbsp;— Lucas Larsson, Unsplash.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
